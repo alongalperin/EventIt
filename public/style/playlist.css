@@ -1,0 +1,49 @@
+#flip {
+    cursor: pointer;
+    font-size:24px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#playlistPanel {
+    margin: 0 auto;
+    width: 70%;
+    display:none;
+}
+
+#youtubeInput {
+    width:60%;
+}
+
+#playlist__submit-botton {
+    width:10%;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    flex: 17.5%;
+    padding: 20px;
+}
+
+/* Song data and like button column */
+.songData {
+    flex: 49%;
+    padding: 20px;
+}
+
+/* song image, just for this example */
+.songimg {
+    width: 100%;
+    height:100%;
+    padding: 2px;
+}
+
+.num {
+    flex: 2.5%;
+    padding: 20px;
+    font-size: 20px;
+}

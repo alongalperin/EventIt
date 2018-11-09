@@ -1,0 +1,56 @@
+@font-face{
+    font-family: Freight_Sans_Medium;
+    src: url(../font/Freight_Sans_Medium_SC.otf);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Column container */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#app {
+    font-family: Freight_Sans_Medium;
+}
+
+#main_div{
+    width: 80%;
+    text-align: center;
+}
+
+.going {
+    background-color: hsl(120, 64%, 66%) !important;
+}
+
+.notSure {
+    background-color: hsla(39, 75%, 66%, 0.931) !important;
+}
+
+.notGoing {
+    background-color: rgb(236, 129, 129) !important;
+}
+
+.btnStatus {
+    display: inline-block;
+    padding: 20px 50px;
+    margin: 20px 0 0 120px;
+    position: relative;
+    background-color: white;
+    border: 2px solid #34495e;
+    color: #34495e;
+    overflow: hidden;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}       
+
+   /* Set the size of the div element that contains the map */
+#map {
+    margin-top:15px;
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+}

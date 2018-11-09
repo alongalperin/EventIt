@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guest Page</title>
+    <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="style/guestPage.css">
+    <link rel="stylesheet" type="text/css" href="style/playlist.css">
+<style>
+
+
+</style>
+
+</head>
+<body style="background-color: whitesmoke;">
+    <div id="main_div" class="container">
+        <div id="app">
+            <h1>Hi {{lastname}} {{firstname}}, we invite you to our event</h1>
+            <h2>{{ eventName }}</h2>
+            <h2>{{ time }}</h2>
+            <h2>{{ address }}</h2>
+
+            <!-- status buttons -->
+            <strong v-if="status == 'unknown'">Please reply:</strong><br/>
+            <button type="button" class="btnStatus"
+                v-bind:class="{ going: status === 'going' }"
+                v-on:click="updateStatus('going')">Going</button>
+            <button type="button" class="btnStatus"
+                v-bind:class="{ notSure: status === 'notSure' }"
+                v-on:click="updateStatus('notSure')">Not Sure</button>
+            <button type="button" class="btnStatus"
+                v-bind:class="{ notGoing: status === 'notGoing' }"
+                v-on:click="updateStatus('notGoing')">Not Going</button>
+    
+            <!--The div element for the map -->
+            <div id="map"></div>
+            <br/>
+
+            <!-- playlist -->
+            <div id="flip">Want to help with the playlist?</div>
+            <div id="playlistPanel">
+                Please paste here Youtube link: <br/>
+                <input id="youtubeInput" type="text">
+                <button id="playlist__submit-botton" onclick="sendSong()">Add</button>
+                <br/>
+                <ul v-if="songs.length > 0">
+                    <li v-for="(song, index) in songs">
+                        <!-- The flexible grid (content) -->
+                        <div class="row">
+                            <div class="num">
+                                {{index + 1}}
+                            </div>
+                            <div class="side">
+                                <img class="songimg" v-bind:src="song.thumbnails"/>
+                            </div>
+                            <div class="songData" style="text-align:left">
+                                <h3>{{song.title}}</h3>
+                                <p>
+                                    <button v-on:click="changeCounter(song)"
+                                        v-bind:class="{ going: song.isUserLiked === true }">Like
+                                    </button>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; likes: {{song.likecounter}}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div> <!-- end of Playlist -->
+        </div>
+    </div>
+
+    <script src="JS/libs/jquery-3.3.1.min.js"></script>
+    <script src="JS/libs/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdqzL7mrPOYXtbJJgz7nMFuY5XZpoBGbQ"> 
+    </script>
+    <script src="JS/libs/moment.js"></script>
+    <script src="JS/libs/deparam.js"></script>
+
+    <script src="JS/util.js"></script>
+    <script src="JS/guestPage.js"></script>
+<script>
+    setAppWithEventDetails(app, eventId)
+        .then(function() {
+            // now that we have the address inside app data, we can init the map
+            initMap();
+        });
+</script>
+
+</body>
+</html>

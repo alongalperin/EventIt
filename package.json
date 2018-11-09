@@ -1,0 +1,26 @@
+{
+  "name": "eventit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": "8.9.4"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "install": "^0.12.1",
+    "mysql2": "^1.5.3",
+    "node-uid": "^0.1.3",
+    "nodemailer": "^4.6.7",
+    "npm": "^6.1.0",
+    "random-id": "0.0.2",
+    "sequelize": "^4.38.0"
+  }
+}
