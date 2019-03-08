@@ -18,8 +18,8 @@ ul {
     width:60%;
 }
 
-#playlist__submit-botton {
-    width:10%;
+#playlist-submit {
+    width:fit-content;
 }
 
 /* Create two unequal columns that sits next to each other */
@@ -46,4 +46,16 @@ ul {
     flex: 2.5%;
     padding: 20px;
     font-size: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .side {
+        flex: 75%;
+        padding: 20px 20px 0px 20px;
+    }
+
+    .songData {
+        flex: 49%;
+        padding: 0px 20px 20px 20px;
+    }
 }

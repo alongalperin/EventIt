@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>Guest Page</title>
-    <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <link rel="stylesheet" type="text/css" href="style/guestPage.css">
     <link rel="stylesheet" type="text/css" href="style/playlist.css">
 </head>
-<body style="background-color: whitesmoke;">
-    <div id="main_div" class="container">
+<body>
+    <div id="main-div" class="container">
         <div id="app">
             <h1>Hi {{lastname}} {{firstname}}, we invite you to our event</h1>
             <h2>{{ eventName }}</h2>
@@ -16,17 +16,22 @@
             <h2>{{ address }}</h2>
 
             <!-- status buttons -->
-            <strong v-if="status == 'unknown'">Please reply:</strong><br/>
-            <button type="button" class="btnStatus"
-                v-bind:class="{ going: status === 'going' }"
-                v-on:click="updateStatus('going')">Going</button>
-            <button type="button" class="btnStatus"
-                v-bind:class="{ notSure: status === 'notSure' }"
-                v-on:click="updateStatus('notSure')">Not Sure</button>
-            <button type="button" class="btnStatus"
-                v-bind:class="{ notGoing: status === 'notGoing' }"
-                v-on:click="updateStatus('notGoing')">Not Going</button>
-    
+            <div class="answer-buttons">
+                <strong v-if="status == 'unknown'">Please reply:</strong><br/>
+                <button
+                    class="btnStatus"
+                    v-bind:class="{ going: status === 'going' }"
+                    v-on:click="updateStatus('going')">Coming</button>
+                <button
+                    class="btnStatus ml-2 mr-2"
+                    v-bind:class="{ notSure: status === 'notSure' }"
+                    v-on:click="updateStatus('notSure')">Not Sure</button>
+                <button 
+                    class="btnStatus"
+                    v-bind:class="{ notGoing: status === 'notGoing' }"
+                    v-on:click="updateStatus('notGoing')">Not Coming</button>
+            </div>
+
             <!--The div element for the map -->
             <div id="map"></div>
             <br/>
@@ -35,8 +40,10 @@
             <div id="flip">Want to help with the playlist?</div>
             <div id="playlistPanel">
                 Please paste here Youtube link: <br/>
-                <input id="youtubeInput" type="text">
-                <button id="playlist__submit-botton" onclick="sendSong()">Add</button>
+                <input 
+                  id="youtubeInput"
+                  type="text">
+                <button id="playlist-submit" onclick="sendSong()">Add</button>
                 <br/>
                 <ul v-if="songs.length > 0">
                     <li v-for="(song, index) in songs">

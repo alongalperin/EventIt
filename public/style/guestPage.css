@@ -3,6 +3,11 @@
     src: url(../font/Freight_Sans_Medium_SC.otf);
 }
 
+body {
+    background-color: whitesmoke;
+    font-family: Freight_Sans_Medium;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -13,13 +18,10 @@
     flex-wrap: wrap;
 }
 
-#app {
-    font-family: Freight_Sans_Medium;
-}
-
-#main_div{
+#main-div{
     width: 80%;
     text-align: center;
+    margin-bottom: 15vh;
 }
 
 .going {
@@ -36,21 +38,38 @@
 
 .btnStatus {
     display: inline-block;
-    padding: 20px 50px;
-    margin: 20px 0 0 120px;
-    position: relative;
+    padding: 20px 0px 20px 0px;
+    width: 15vw;
     background-color: white;
     border: 2px solid #34495e;
     color: #34495e;
     overflow: hidden;
-    -webkit-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-}       
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
 
-   /* Set the size of the div element that contains the map */
+.btnStatus:hover {
+    border: 2px solid #B0B0B0;
+}
+
+/* Set the size of the div element that contains the map */
 #map {
     margin-top:15px;
     height: 400px;  /* The height is 400 pixels */
     width: 100%;  /* The width is the width of the web page */
+}
+
+@media only screen and (max-width: 768px) {
+    .answer-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btnStatus {
+        width: 50vw;
+        margin-bottom: 2vh;
+    }
 }
