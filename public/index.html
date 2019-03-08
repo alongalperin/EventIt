@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EventIt Create Event</title>
-  <script type="text/javascript" src="./JS/libs/jquery-3.3.1.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+
+  <title>EventIt Create Event</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="./style/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
   <link href="./style/index.css" rel="stylesheet">
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   
   <style>
-      /* Always set the map height explicitly to define the size of the div
-      * element that contains the map. */
+    /* Always set the map height explicitly to define the size of the div
+    * element that contains the map. */
     #map {
       height: 100%;
     }
 
+    
     #description {
       font-family: Roboto;
       font-size: 15px;
       font-weight: 300;
     }
-
+    
     #infowindow-content .title {
       font-weight: bold;
     }
@@ -96,65 +102,63 @@
   </div>
 
   <!-- body -->
-  <div class="container-fluid h-100" style="margin-top:30px">
-    
-  <div class="row justify-content-center align-items-center h-100">
-    <form id="create-form">
-      <div class="form-group">
-          Your Email <small>(Mandatory for us to send you the manage event details)</small><br>
-          <input class="form-control" id="ownerEmail" type="email" name="name"><br>
-      </div>
+  <div class="container-fluid h-100" style="margin-top:30px;">
+    <div class="row h-100">
+      <form id="create-form" class="w-100 mb-5">
+        <div class="form-group col-md-10 offset-md-1 col-10 offset-1">
+            Your Email <small>(Mandatory for us to send you the manage event details)</small><br>
+            <input class="form-control" id="ownerEmail" type="email" name="name"><br>
+        </div>
 
-      <div class="form-group">
-          Event name<br>
-          <input class="form-control" id="name" type="text" name="name"><br>
-      </div>
+        <div class="form-group col-md-10 offset-md-1 col-10 offset-1">
+            Event name<br>
+            <input class="form-control" id="name" type="text" name="name"><br>
+        </div>
 
-      <div class="form-group">
-          Pick a date<br>
-          <div class="form-group">
-              <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                  <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                  <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                  </div>
+        <div class="form-group col-md-10 offset-md-1 col-10 offset-1">
+            Pick a date<br>
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GOOGLE MAPS-->
+        <div class="form-group text-center col-md-10 offset-md-1 col-10 offset-1" style="height: 60vh;">
+          <div class="pac-card" id="pac-card">
+            <div>
+              <div id="title">
+                Autocomplete search
               </div>
-          </div>
-      </div>
-
-      <!-- GOOGLE MAPS-->
-      <div class="form-group text-center" style="width: 1000px; height: 500px;">
-        <div class="pac-card" id="pac-card">
-          <div>
-            <div id="title">
-              Autocomplete search
+            </div>
+            <div id="pac-container">
+              <input id="pac-input" type="text" placeholder="Enter a location">
             </div>
           </div>
-          <div id="pac-container">
-            <input id="pac-input" type="text" placeholder="Enter a location">
+
+          <div id="map"></div>
+
+          <div id="infowindow-content">
+            <img src="" width="16" height="16" id="place-icon">
+            <span id="place-name"  class="title"></span><br>
+            <span id="place-address"></span>
           </div>
         </div>
+        <!-- END GOOGLE MAPS-->
 
-        <div id="map"></div>
-
-        <div id="infowindow-content">
-          <img src="" width="16" height="16" id="place-icon">
-          <span id="place-name"  class="title"></span><br>
-          <span id="place-address"></span>
+        <div class="form-group text-center">
+            <div>
+                <li class="text-danger" id="list_errors" style="list-style: none">
+                </li>
+            </div>
+            <input type="submit" class="btn btn-info w-25 mt-4" value="Create">
         </div>
-      </div>
-      <!-- END GOOGLE MAPS-->
-
-      <div class="form-group text-center">
-          <div>
-              <li class="text-danger" id="list_errors" style="list-style: none;">
-                
-              </li>
-          </div>
-          <input type="submit" class="btn btn-info w-25" value="Create">
-      </div>
-    </form>
-  </div>
+      </form>
+    </div>
   </div> 
    
 <div id="myModal" class="modal fade">

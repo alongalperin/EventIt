@@ -33,7 +33,7 @@ const { SongsInEvents } = require('./db/Models/SongsInEvents');
 const { LikesToSongs } = require('./db/Models/LikesToSongs');
 
 
-// initialize db. run only when  initDB() run bellow. usually in comment
+// initialize db. run only when  initDB() run bellow. usually the invoke line will be in comment
 let initDB = function(){ sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
     .then(function() {
         return sequelize
