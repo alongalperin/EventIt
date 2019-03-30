@@ -1,4 +1,5 @@
 function setAppWithEventDetails(app, manageId){
+    // app is the vueJS app of guest page
     return new Promise((resolve, reject) => {
         $.get("/event/" + manageId, function(data, status){
             app.eventName = data.name;
