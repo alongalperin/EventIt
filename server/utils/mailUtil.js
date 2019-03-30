@@ -18,7 +18,7 @@ let mailSender = function(to, eventId, guestId) {
         subject: 'You are invited to an event!',
         html:  `<center>
                 <h2>Hi, you are invited to an event! All the details in link:</h2> <br/> 
-                <a href="${url}guest.html?eventId=${eventId}&guestId=${guestId}">Come</a> <br/>
+                <a href="${url}guest.html?eventId=${eventId}&guestId=${guestId}">Link</a> <br/><br/>
                 <img src="https://imgbbb.com/images/2019/03/30/alcohol-1281704_640.jpg">
                 </center>`
         };
