@@ -1,6 +1,6 @@
 # EventIt
 
-My self learning project.  
+Self learning project.  
   
 Walk Through:  
 https://www.youtube.com/watch?v=klVWGHtRTuE  
