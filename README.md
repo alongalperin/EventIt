@@ -1,6 +1,10 @@
 # EventIt
 
-My self learning project.
+My self learning project.  
+  
+Walk Through:  
+https://www.youtube.com/watch?v=klVWGHtRTuE  
+  
 Check it out:
 https://eventit.herokuapp.com
 
