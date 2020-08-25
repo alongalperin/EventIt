@@ -1,7 +1,13 @@
 # EventIt
 
-My self learning project.
-Check it out:
+Self learning project.  
+  
+Walk Through:  
+https://www.youtube.com/watch?v=DpAL7fcyedk  
+  
+Check it out:  
 https://eventit.herokuapp.com
 
-Made using NodeJS (MySQL and Sequelize) and VueJS
+**Built With**  
+**Frontend:** VueJS  
+**Backend:** NodeJS, MySQL and Sequelize  
