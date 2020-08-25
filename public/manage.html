@@ -1,202 +1,222 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Manage Event</title>
-    <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">    
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
 
-    <link rel="stylesheet" type="text/css" href="style/playlist.css">
-    <link rel="stylesheet" type="text/css" href="style/managePage.css">
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="style/playlist.css" />
+    <link rel="stylesheet" type="text/css" href="style/managePage.css" />
+  </head>
+  <body>
     <div class="container">
-        <div id="app" style="font-family: Roboto; margin: 20px">
-            <h1>Yours Event Details:</h1>
-            <h1>{{ eventName }}</h1>
-            <p>{{ time }}</p>
-            <p>{{ address }}</p>
+      <div id="app" style="font-family: Roboto; margin: 20px">
+        <h1>Yours Event Details:</h1>
+        <h1>{{ eventName }}</h1>
+        <p>{{ time }}</p>
+        <p>{{ address }}</p>
 
-            <hr>
-            <div>
-                <div id="addGuest">
-                    <h4>Add Guest:</h4>
-                    <form id="addGuest-form"> 
-                        <label>First name:</label>
-                        <input id="firstname" type="text">
-                        <label>Last name:</label>
-                        <input id="lastname" type="text">
-                        <label>Email:</label>
-                        <input id="email" type="text">
-                        <input type="submit" value="Add Guest">
-                    </form>
-                </div> <!-- add guest -->
-                <br />
-                <hr>
-                <br />
-                <h3>Guests list</h3>
-                Coming:
-                <ul>
-                    <li v-for="guest in guests.going">
-                        {{ guest.firstname }} {{ guest.lastname }} {{ guest.status }}
-                    </li>
-                </ul>
-                Not Coming:
-                <ul>
-                    <li v-for="guest in guests.notGoing">
-                        {{ guest.firstname }} {{ guest.lastname }} {{ guest.status }}
-                    </li>
-                </ul>
-                Not Sure:
-                <ul>
-                    <li v-for="guest in guests.notSure">
-                        {{ guest.firstname }} {{ guest.lastname }} {{ guest.status }}
-                    </li>
-                </ul>
-                Didn't Answer:
-                <ul>
-                    <li v-for="guest in guests.unknown">
-                        {{ guest.firstname }} {{ guest.lastname }}
-                    </li>
-                </ul>
-            </div>
-
-            <hr>
-            <!-- playlist -->
-            <div id="playlistPanel" style="display:block; margin:unset;">
-                <h3>Manage Playlist</h3>
-                Please paste here Youtube link: <br/>
-                <input id="youtubeInput" type="text">
-                <button id="playlist__submit-botton" onclick="sendSong()">Add</button>
-                <br/>
-                <ul id="songsList" v-if="songs.length > 0">
-                    <li v-for="(song, index) in songs">
-                        <!-- The flexible grid (content) -->
-                        <div class="row">
-                            <div class="num">
-                                {{index + 1}}
-                            </div>
-                            <div class="side">
-                                <img class="songimg" v-bind:src="song.thumbnails"/>
-                            </div>
-                            <div class="songData" style="text-align:left">
-                                <h3>{{song.title}}</h3>
-                                <p>
-                                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; likes: {{song.likecounter}}
-                                </p>
-                            </div>
-                            <div class="removeSong">
-                                <button v-on:click="removeSong(song)"
-                                style="height:auto !important">Remove</button>                                    
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div> <!-- end of Playlist -->
+        <hr />
+        <div>
+          <div id="addGuest">
+            <h4>Add Guest:</h4>
+            <form id="addGuest-form">
+              <label>First name:</label>
+              <input id="firstname" type="text" />
+              <label>Last name:</label>
+              <input id="lastname" type="text" />
+              <label>Email:</label>
+              <input id="email" type="text" />
+              <input type="submit" value="Add Guest" />
+            </form>
+          </div>
+          <!-- add guest -->
+          <br />
+          <hr />
+          <br />
+          <h3>Guests list</h3>
+          Coming:
+          <ul>
+            <li v-for="guest in guests.going">
+              {{ guest.firstname }} {{ guest.lastname }} {{ guest.status }}
+            </li>
+          </ul>
+          Not Coming:
+          <ul>
+            <li v-for="guest in guests.notGoing">
+              {{ guest.firstname }} {{ guest.lastname }} {{ guest.status }}
+            </li>
+          </ul>
+          Not Sure:
+          <ul>
+            <li v-for="guest in guests.notSure">
+              {{ guest.firstname }} {{ guest.lastname }} {{ guest.status }}
+            </li>
+          </ul>
+          Didn't Answer:
+          <ul>
+            <li v-for="guest in guests.unknown">
+              {{ guest.firstname }} {{ guest.lastname }}
+            </li>
+          </ul>
         </div>
+
+        <hr />
+        <!-- playlist -->
+        <div id="playlistPanel" style="display: block; margin: unset">
+          <h3>Manage Playlist</h3>
+          Please paste here Youtube link: <br />
+          <input id="youtubeInput" type="text" />
+          <button id="playlist__submit-botton" onclick="sendSong()">Add</button>
+          <br />
+          <ul id="songsList" v-if="songs.length > 0">
+            <li v-for="(song, index) in songs">
+              <!-- The flexible grid (content) -->
+              <div class="row">
+                <div class="num">{{index + 1}}</div>
+                <div class="side">
+                  <img class="songimg" v-bind:src="song.thumbnails" />
+                </div>
+                <div class="songData" style="text-align: left">
+                  <h3>{{song.title}}</h3>
+                  <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; likes: {{song.likecounter}}
+                  </p>
+                </div>
+                <div class="removeSong">
+                  <button
+                    v-on:click="removeSong(song)"
+                    style="height: auto !important"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- end of Playlist -->
+      </div>
     </div>
 
-<script src="JS/libs/jquery-3.3.1.min.js"></script>
-<script src="https://unpkg.com/vue"></script>
-<script src="JS/libs/moment.js"></script>
-<script src="JS/libs/deparam.js"></script>
+    <script src="JS/libs/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="JS/libs/moment.js"></script>
+    <script src="JS/libs/deparam.js"></script>
 
-<script>
-    let apiKey = "AIzaSyAlhNPlBgLMp5MXg7cCRJ4L5CfSNvrHaxA";
-    var dateFormat = 'DD/MM/YYYY hh:mm';
+    <script>
+      let apiKey = "AIzaSyC6lDxO8tsmlTKYGCFZmTxT9wc_uNVeRx0";
+      var dateFormat = "DD/MM/YYYY hh:mm";
 
-    const app = new Vue({
-        el: '#app',
+      const app = new Vue({
+        el: "#app",
         data: {
-            eventId: '',
-            eventName : '',
-            address : '',
-            time : '',
-            guests : [],
-            songs: []
+          eventId: "",
+          eventName: "",
+          address: "",
+          time: "",
+          guests: [],
+          songs: [],
         },
         methods: {
-            removeSong: function (song) {
-                $.ajax({
-                    type:'DELETE',
-                    url: '/event/song',
-                    data: JSON.stringify({songEventId : song.id}),
-                    contentType: 'application/json',
-                    success: function(result) {
-                        app.songs = app.songs.filter(s => s.id !== song.id);
-                    }
-                });
+          removeSong: function (song) {
+            $.ajax({
+              type: "DELETE",
+              url: "/event/song",
+              data: JSON.stringify({ songEventId: song.id }),
+              contentType: "application/json",
+              success: function (result) {
+                app.songs = app.songs.filter((s) => s.id !== song.id);
+              },
+            });
+          },
+        },
+      });
 
-            }
-        }
-    });
+      let params = jQuery.deparam(window.location.search);
 
-    let params = jQuery.deparam(window.location.search);
-
-    $( document ).ready(function() {
+      $(document).ready(function () {
         // get event Details
-        $.get("/event/" + params['manageId'], function(data, status){
-            app.eventName = data.name;
-            app.address = data.address;
-            const date = new Date(data.date);
-            app.time = moment(date).format('DD/MM/YYYY hh:mm');
-            app.eventId = data.eventId;
-        }).then(function() {  // fetch songs of event. We use then because we need the eventID 
-            // Get event songs
-            $.get("/event/songs/" + app.eventId, function(Songsdata, status){
+        $.get("/event/" + params["manageId"], function (data, status) {
+          app.eventName = data.name;
+          app.address = data.address;
+          const date = new Date(data.date);
+          app.time = moment(date).format("DD/MM/YYYY hh:mm");
+          app.eventId = data.eventId;
+        }).then(function () {
+          // fetch songs of event. We use then because we need the eventID
+          // Get event songs
+          $.get("/event/songs/" + app.eventId, function (Songsdata, status) {
             for (let i = 0, len = Songsdata.length; i < len; i++) {
-                let songId = Songsdata[i].songId;
-                $.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + songId + "&key=" + apiKey, function (data) {
-                    if (data.items.length == 0) {
-                        return;
-                    }
-                    let song = {
-                        id: Songsdata[i].id,
-                        songId: songId,
-                        title: data.items[0].snippet.title,
-                        thumbnails: data.items[0].snippet.thumbnails.high.url,
-                        likecounter: Songsdata[i].likesCounter
-                    }
-                    app.songs.push(song);
-                });
+              let songId = Songsdata[i].songId;
+              $.get(
+                "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" +
+                  songId +
+                  "&key=" +
+                  apiKey,
+                function (data) {
+                  if (data.items.length == 0) {
+                    return;
+                  }
+                  let song = {
+                    id: Songsdata[i].id,
+                    songId: songId,
+                    title: data.items[0].snippet.title,
+                    thumbnails: data.items[0].snippet.thumbnails.high.url,
+                    likecounter: Songsdata[i].likesCounter,
+                  };
+                  app.songs.push(song);
+                }
+              );
             }
+          });
         });
-        });
-            
+
         // get event Guests
-        $.get("/event/getGuests/" + params['manageId'], function(data, status){
-            app.guests = data;
+        $.get("/event/getGuests/" + params["manageId"], function (
+          data,
+          status
+        ) {
+          app.guests = data;
         });
-    });
+      });
 
-
-    $('#addGuest-form').on('submit', function(e) {
+      $("#addGuest-form").on("submit", function (e) {
         e.preventDefault();
-        
+
         let firstname = $("#firstname").val().trim();
         let lastname = $("#lastname").val().trim();
         let email = $("#email").val().trim();
-        let manageId = params['manageId'];
+        let manageId = params["manageId"];
 
         $.ajax({
-            type: 'POST',
-            data: JSON.stringify({firstname : firstname, lastname : lastname, email : email, manageId : manageId}),
-            contentType: 'application/json',
-            url: '/event/addGuest',
-            success: function(newGuest){
-                app.guests.unknown.push({
-                    firstname : newGuest.firstname,
-                    lastname : newGuest.lastname,
-                    status: "no"
-                });
+          type: "POST",
+          data: JSON.stringify({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            manageId: manageId,
+          }),
+          contentType: "application/json",
+          url: "/event/addGuest",
+          success: function (newGuest) {
+            app.guests.unknown.push({
+              firstname: newGuest.firstname,
+              lastname: newGuest.lastname,
+              status: "no",
+            });
 
-                // clean form inputs
-                $('#addGuest-form').each(function(){ 
-                    this.reset();
-                });
-            }
+            // clean form inputs
+            $("#addGuest-form").each(function () {
+              this.reset();
+            });
+          },
         });
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>
