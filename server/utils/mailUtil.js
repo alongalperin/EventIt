@@ -1,6 +1,9 @@
 var nodemailer = require("nodemailer");
 
 let mailSenderService = function (to, eventId, guestId) {
+  console.log("username: " + process.env.gmail_usernname);
+  console.log("gmail_password: " + process.env.gmail_password);
+
   var transporter = nodemailer.createTransport({
     service: "gmail",
     port: 587,
