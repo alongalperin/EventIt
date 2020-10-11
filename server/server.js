@@ -6,19 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 let { sequelize } = require("./db/Sequelize");
-
-const { createEvent } = require("./routes/events/createEvent");
-const { getEvent } = require("./routes/events/getEvent");
-const { addGuest } = require("./routes/events/addGuest");
-const { addSong } = require("./routes/events/addSong");
-const { getSongsOfEvent } = require("./routes/events/getSongsOfEvent");
-const { addLikeToSong } = require("./routes/events/addLikeToSong");
-const { removeLikeFromSong } = require("./routes/events/removeLikeFromSong");
-const { removeSongFromEvent } = require("./routes/events/removeSongFromEvent");
-const { songsLikedByUser } = require("./routes/events/songsLikedByUser");
-const { getGuests } = require("./routes/events/getGuests");
-const { updateGuestStatus } = require("./routes/guests/updateGuestStatus");
-const { getGuestData } = require("./routes/guests/getGuestData");
+const routes = require('./routes');
 
 const port = process.env.PORT || 3000;
 let app = express();
@@ -47,23 +35,10 @@ let initDB = function () {
       }
     );
 };
-
 // RESET THE DB
 // initDB();
 
-app.use(getEvent);
-app.use(createEvent);
-app.use(addGuest);
-app.use(addSong);
-app.use(getSongsOfEvent);
-app.use(addLikeToSong);
-app.use(removeLikeFromSong);
-app.use(removeSongFromEvent);
-app.use(songsLikedByUser);
-app.use(getGuests);
-
-app.use(updateGuestStatus);
-app.use(getGuestData);
+app.use(routes);
 
 app.listen(port, () => {
   console.log(`Started up at ${port}`);
