@@ -105,20 +105,22 @@
     <div class="row h-100">
       <form id="create-form" class="w-100 mb-5">
         <div class="form-group col-md-10 offset-md-1 col-10 offset-1">
-            Your Email <small>(Mandatory for us to send you the manage event details)</small><br>
+            <label for="ownerEmail">
+              Your Email <small>(Mandatory for us to send you the manage event details)</small>
+            </label><br>
             <input class="form-control" id="ownerEmail" type="email" name="name"><br>
         </div>
 
         <div class="form-group col-md-10 offset-md-1 col-10 offset-1">
-            Event name<br>
-            <input class="form-control" id="name" type="text" name="name"><br>
+            <label for="name">Event name</label><br>
+            <input class="form-control" id="name" name="name" type="text"><br>
         </div>
 
         <div class="form-group col-md-10 offset-md-1 col-10 offset-1">
-            Pick a date<br>
+            <label for="date">Pick a date</label><br>
             <div class="form-group">
                 <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                    <input id="date" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
                     <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
