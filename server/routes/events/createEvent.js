@@ -13,8 +13,13 @@ const createEvent = router.post("/events", async (req, res) => {
   let manageId = randomId(12, "0");
   let eventId = randomId(10, "0");
   let { ownerEmail } = req.body;
+<<<<<<< HEAD
+		
+  Event.create({
+=======
 
   await Event.create({
+>>>>>>> 302df4148fdfc33d913dd96d48f92040930fa4e6
     id: eventId, // the id is the same as the eventID
     manageId,
     eventId,
