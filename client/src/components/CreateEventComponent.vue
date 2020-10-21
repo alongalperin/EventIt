@@ -78,12 +78,6 @@ export default {
       const name = place.name;
 
       this.place = { ...this.place, lat, lng, address, name };
-
-      console.log(this.place);
-
-      this.$refs.mapRef.$mapPromise.then((map) => {
-        map.panTo({ lat, lng, zoom: 15 });
-      });
     },
     async onSubmit() {
       this.clearErrors();
