@@ -5,16 +5,13 @@ const { SongsInEvents } = require("../../db/Models/SongsInEvents");
 const router = express.Router();
 
 // POST /event/addSong    add song to event playlist
-const addSong = router.post("/event/addSong/:eventId/:songId", async function (
-  req,
-  res
-) {
+const addSong = router.post("/events/songs/", async function (req, res) {
   try {
-    const { eventId, songId } = req.params;
+    const { eventId, youtubeId } = req.body;
 
     let newSong = await SongsInEvents.create({
       eventId: eventId,
-      songId: songId,
+      youtubeId: youtubeId,
       likesCounter: 0,
     });
 

@@ -5,7 +5,7 @@ const { Event } = require("../../db/Models/Event");
 const router = express.Router();
 
 // GET ///event/:eventId    returns event instance
-const getEvent = router.get("/event/:eventId", function (req, res) {
+const getEvent = router.get("/events/:eventId", function (req, res) {
   let eventId = req.params.eventId;
   let query = {};
 
@@ -14,7 +14,7 @@ const getEvent = router.get("/event/:eventId", function (req, res) {
     query = {
       eventId: eventId,
     };
-  } else if (checkValidId(eventId, 18)) {
+  } else if (checkValidId(eventId, 12)) {
     // we have event manager
     query = {
       manageId: eventId,

@@ -5,11 +5,7 @@ const { GuestEvents } = require("../../db/Models/GuestEvents");
 const router = express.Router();
 
 //POST /event/updateGuestStatus    update guest status to event
-const updateGuestStatus = router.post("/guest/updateGuestStatus/", function (
-  req,
-  res
-) {
-  // todo: change  to put
+const updateGuestStatus = router.put("/guests/status", function (req, res) {
   let guestId = req.body.guestId;
   let eventId = req.body.eventId;
   let newStatus = req.body.newStatus;

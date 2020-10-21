@@ -4,16 +4,12 @@ const { SongsInEvents } = require("../../db/Models/SongsInEvents");
 
 const router = express.Router();
 
-const getSongsOfEvent = router.get("/event/songs/:eventId", async function (
-  req,
-  res
-) {
+const getSongsOfEvent = router.get("/events/songs/:eventId", async function (req, res) {
   try {
     const eventId = req.params.eventId;
-
     let songs = await SongsInEvents.findAll({
       where: { eventId: eventId },
-      attributes: ["id", "songId", "likesCounter"],
+      attributes: ["id", "youtubeId", "likesCounter"],
     });
     res.status(200).send(songs);
   } catch (e) {

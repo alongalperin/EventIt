@@ -29,5 +29,4 @@ router.use(getGuests);
 router.use(updateGuestStatus);
 router.use(getGuestData);
 
-
 module.exports = router;
