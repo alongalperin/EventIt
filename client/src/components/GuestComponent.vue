@@ -10,8 +10,9 @@
         <h2>{{ place.address }}</h2>
 
         <!-- status buttons -->
+        <strong v-if="status == 'unknown'">Please reply:</strong><br />
+
         <div class="answer-buttons">
-          <strong v-if="status == 'unknown'">Please reply:</strong><br />
           <button class="btnStatus green-hover" v-bind:class="{ going: status === 'going' }" v-on:click="updateStatus('going')">Coming</button>
           <button class="btnStatus orange-hover" v-bind:class="{ notSure: status === 'notSure' }" v-on:click="updateStatus('notSure')">Not Sure</button>
           <button class="btnStatus red-hover" v-bind:class="{ notGoing: status === 'notGoing' }" v-on:click="updateStatus('notGoing')">Not Coming</button>
@@ -285,7 +286,7 @@ function youtubeParser(url) {
   background: rgb(236, 129, 129);
 }
 
-.btnStatus:nth-child(3) {
+.btnStatus:nth-child(2) {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 

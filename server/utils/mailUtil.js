@@ -1,9 +1,6 @@
 var nodemailer = require("nodemailer");
 
 let mailSenderService = function (to, eventId, guestId) {
-  console.log("username: " + process.env.gmail_usernname);
-  console.log("gmail_password: " + process.env.gmail_password);
-
   var transporter = nodemailer.createTransport({
     service: "gmail",
     port: 587,
@@ -47,8 +44,10 @@ let mailSenderService = function (to, eventId, guestId) {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
+      reject();
     } else {
       console.log("Email sent: " + info.response);
+      resolve();
     }
   });
 };

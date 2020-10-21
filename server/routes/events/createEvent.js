@@ -25,9 +25,9 @@ const createEvent = router.post("/events", async (req, res) => {
     address: req.body.address,
     lng: req.body.lng,
     lat: req.body.lat,
-  }).then(() => {
-    mailSenderService(ownerEmail, manageId);
   });
+
+  mailSenderService(ownerEmail, manageId);
 
   res.status(200).send(manageId);
 });

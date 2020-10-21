@@ -66,6 +66,7 @@ export default {
     return {
       eventId: "",
       eventName: "",
+      addressName: "",
       address: "",
       date: "",
       guests: [],
@@ -182,12 +183,12 @@ hr {
 
         input[type="submit"] {
           margin: 0 auto;
-          margin-top: 5px;
-          width: 70%;
+          width: 40%;
+          padding: 5px;
         }
 
         .form-group {
-          margin-bottom: 5px;
+          margin-bottom: 16px;
         }
       }
 
@@ -197,6 +198,7 @@ hr {
 
       input {
         margin-left: 3px;
+        margin-top: 3px;
         line-height: 27px;
         font-size: 1rem;
       }

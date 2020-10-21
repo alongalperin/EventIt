@@ -2,7 +2,6 @@ const express = require("express");
 const { mailSenderService } = require("../../utils/mailUtil");
 const randomId = require("random-id");
 
-const { Event } = require("../../db/Models/Event");
 const { Guest } = require("../../db/Models/Guest");
 const { GuestEvents } = require("../../db/Models/GuestEvents");
 
