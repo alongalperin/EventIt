@@ -23,7 +23,7 @@ let mailSenderService = function (to, eventId, guestId) {
       subject: "You are invited to an event!",
       html: `<center>
                 <h2>Hi, you are invited to an event! All the details in link:</h2> <br/> 
-                <h3><a href="${url}guest.html?eventId=${eventId}&guestId=${guestId}">Link</a></h3> <br/><br/>
+                <h3><a href="${url}guest/${eventId}/${guestId}">Link</a></h3> <br/><br/>
                 <img style="width: 60vw; height: 80vh" src="https://github.com/alongalperin/EventIt/blob/master/public/img/email_image.jpg?raw=true" />
                 </center>`,
     };
@@ -37,8 +37,8 @@ let mailSenderService = function (to, eventId, guestId) {
       subject: "Your new event details",
       html: `<center>
                     <h2>Congratulations! You created an event</h2> <h3> here is a link for managing:</h3> 
-                    <h3><a href="${url}manage.html?manageId=${eventId}">Manage Event</a></h3> <br/>
-                    <img style="width: 60vw; height: 80vh" src="https://github.com/alongalperin/EventIt/blob/master/public/img/email_image.jpg?raw=true" />
+                    <h3><a href="${url}manage/${eventId}">Manage Event</a></h3> <br/>
+                    <img style="width: 30vw; height: 40vh" src="https://github.com/alongalperin/EventIt/blob/master/client/src/img/email_image.jpg" />
                     </center>`,
     };
   }

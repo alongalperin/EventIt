@@ -9,19 +9,13 @@ const { GuestEvents } = require("../../db/Models/GuestEvents");
 const router = express.Router();
 
 //POST /event/addGuest  # add guest to event
-const addGuest = router.post("/event/addGuest", async (req, res) => {
+const addGuest = router.post("/events/guests", async (req, res) => {
   let guestId = randomId(10, "0");
   const manageId = req.body.manageId;
   const guestEmail = req.body.email;
+  const eventId = req.body.eventId;
 
   try {
-    // we have the manageId and we what the eventId
-    let eventId = await Event.findOne({
-      where: { manageId: manageId },
-      attributes: ["eventId"],
-    });
-    eventId = eventId.eventId; // get eventId property
-
     let newGuest = await Guest.create({
       id: guestId,
       firstname: req.body.firstname,
@@ -39,6 +33,7 @@ const addGuest = router.post("/event/addGuest", async (req, res) => {
     mailSenderService(guestEmail, eventId, guestId);
     res.status(200).send(newGuest);
   } catch (e) {
+    console.log(e.message);
     res.status(500).send();
   }
 });

@@ -6,32 +6,25 @@ const { LikesToSongs } = require("../../db/Models/LikesToSongs");
 const router = express.Router();
 
 //POST /event/removeLike    remove like that guest get to song in event
-const removeLikeFromSong = router.post(
-  "/event/removeLike/:eventId/:guestId/:songInEventId",
-  async function (req, res) {
-    try {
-      const { eventId, guestId, songInEventId } = req.params;
+const removeLikeFromSong = router.post("/events/removeLike", async function (req, res) {
+  try {
+    const { guestId, songId } = req.body;
+    await SongsInEvents.findByPk(songId).then((songInEvent) => {
+      return songInEvent.decrement("likesCounter", { by: 1 }); // decrease in 1
+    });
 
-      // decrease song like counter
-      await SongsInEvents.findOne({
-        where: {
-          id: songInEventId,
-        },
-      }).then((songInEvent) => {
-        return songInEvent.decrement("likesCounter", { by: 1 }); // decrease in 1
-      });
+    await LikesToSongs.destroy({
+      where: {
+        guestId,
+        songInEventId: songId,
+      },
+    });
 
-      await LikesToSongs.destroy({
-        where: {
-          songInEventId: songInEventId,
-        },
-      });
-
-      res.status(200).send();
-    } catch (e) {
-      res.status(500).send();
-    }
+    const updatedSong = await SongsInEvents.findByPk(songId);
+    res.status(200).send(updatedSong);
+  } catch (e) {
+    res.status(500).send();
   }
-);
+});
 
 module.exports = { removeLikeFromSong };
