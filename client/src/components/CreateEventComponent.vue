@@ -40,6 +40,14 @@
         </div>
       </form>
     </div>
+    <modalComponent :active="isModalOpen" :onClose="navigateToEventManage">
+      <template v-slot:header>
+        Event Created Successfully
+      </template>
+      <template v-slot:body>
+        Click continue to reach event management panel
+      </template>
+    </modalComponent>
   </div>
 </template>
 
@@ -48,6 +56,7 @@ import axios from "@/axios";
 import { Datetime } from "vue-datetime";
 import "vue-datetime/dist/vue-datetime.css";
 import MyMapComponent from "./MyMapComponent";
+import ModalComponent from "./UI/ModalComponent";
 
 export default {
   name: "CreateEventComponent",
@@ -60,18 +69,19 @@ export default {
         lat: 32.570833,
         lng: 34.951667,
       },
+      manageId: "",
       errors: [],
+      isModalOpen: false,
     };
   },
   components: {
     datetime: Datetime,
     myMapComponent: MyMapComponent,
+    modalComponent: ModalComponent,
   },
   mounted() {},
   methods: {
     setAddress(place) {
-      console.log(place);
-
       const { formatted_address: address } = place;
       const lat = place.geometry.location.lat();
       const lng = place.geometry.location.lng();
@@ -92,7 +102,8 @@ export default {
           lat: this.place.lat,
           lng: this.place.lng,
         });
-        this.$router.push({ path: `/manage/${manageId}` });
+        this.manageId = manageId;
+        this.isModalOpen = true;
       } catch (err) {
         console.error(err.message);
       }
@@ -117,6 +128,13 @@ export default {
     },
     clearErrors() {
       this.errors = [];
+    },
+    closeModal() {
+      this.isModalOpen = false;
+    },
+    navigateToEventManage() {
+      this.closeModal();
+      this.$router.push({ path: `/manage/${this.manageId}` });
     },
   },
   computed: {

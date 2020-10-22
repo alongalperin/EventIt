@@ -6,7 +6,7 @@ const router = express.Router();
 
 // POST /event/addLike  add like to song
 const addLikeToSong = router.post("/events/addLike/", async function (req, res) {
-  const { eventId, guestId, songId } = req.body;
+  const { guestId, songId } = req.body;
   try {
     // increase song like counter
     await SongsInEvents.findByPk(songId).then((songInEvent) => {
@@ -15,7 +15,6 @@ const addLikeToSong = router.post("/events/addLike/", async function (req, res) 
 
     await LikesToSongs.create({
       guestId: guestId,
-      eventId: eventId,
       songInEventId: songId,
     });
 

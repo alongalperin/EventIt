@@ -8,6 +8,11 @@
 export default {
   name: "App",
   components: {},
+  watch: {
+    $route(to, from) {
+      document.title = "Event-It";
+    },
+  },
 };
 </script>
 

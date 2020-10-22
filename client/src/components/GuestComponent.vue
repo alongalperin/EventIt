@@ -13,9 +13,9 @@
         <strong v-if="status == 'unknown'">Please reply:</strong><br />
 
         <div class="answer-buttons">
-          <button class="btnStatus green-hover" v-bind:class="{ going: status === 'going' }" v-on:click="updateStatus('going')">Coming</button>
-          <button class="btnStatus orange-hover" v-bind:class="{ notSure: status === 'notSure' }" v-on:click="updateStatus('notSure')">Not Sure</button>
-          <button class="btnStatus red-hover" v-bind:class="{ notGoing: status === 'notGoing' }" v-on:click="updateStatus('notGoing')">Not Coming</button>
+          <button class="btnStatus green-hover" v-bind:class="{ going: status === 'green' }" v-on:click="updateStatus('going')">Coming</button>
+          <button class="btnStatus orange-hover" v-bind:class="{ notSure: status === 'orange' }" v-on:click="updateStatus('notSure')">Not Sure</button>
+          <button class="btnStatus red-hover" v-bind:class="{ notGoing: status === 'red' }" v-on:click="updateStatus('notGoing')">Not Coming</button>
         </div>
       </div>
       <div style="margin-top: 10px;">
@@ -48,7 +48,7 @@
                 <p class="song-title">{{ song.title }}</p>
               </div>
               <div class="song-like-container">
-                <button @click="changeLikesCounter(song)" v-bind:class="{ going: song.isUserLiked === true }">
+                <button @click="changeLikesCounter(song)" v-bind:class="{ green: song.isUserLiked === true }">
                   Like
                 </button>
                 likes: {{ song.likesCounter }}
@@ -65,7 +65,7 @@
 <script>
 import axios from "@/axios";
 import MyMapComponent from "./MyMapComponent";
-import LoaderComponent from "./LoaderComponent";
+import LoaderComponent from "./UI/LoaderComponent";
 // todo: create enum for going status
 
 export default {
@@ -90,6 +90,7 @@ export default {
       playlistOpen: false,
       newSongURL: "",
       loadingSongs: false,
+      songsLikedByUser: null,
       errorOnLoadingSongs: false,
       loadingEventDetails: true,
     };
@@ -103,7 +104,6 @@ export default {
     this.place.address = eventData.address;
     this.place.lat = eventData.lat;
     this.place.lng = eventData.lng;
-
     const date = new Date(eventData.date);
     const dateFormat = new Intl.DateTimeFormat("UK", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
     this.date = dateFormat.format(date);
@@ -126,6 +126,7 @@ export default {
     },
     openPlaylist() {
       this.playlistOpen = !this.playlistOpen;
+      this.initLikesForSongs();
       this.initSongs();
     },
     async addSong() {
@@ -151,7 +152,7 @@ export default {
         youtubeId,
         title: youtubeDataResponse.snippet.title,
         thumbnails: youtubeDataResponse.snippet.thumbnails.high.url,
-        likecounter: 0,
+        likesCounter: 0,
         isUserLiked: false,
       });
 
@@ -172,6 +173,7 @@ export default {
             id: id,
             ...songDataFromYoutube,
             likesCounter,
+            isUserLiked: this.songsLikedByUser.has(id),
           };
           this.songs.push(songDataFromYoutube);
         }
@@ -180,6 +182,21 @@ export default {
         this.songs = [];
         this.loadingSongs = false;
         this.errorOnLoadingSongs = true;
+      }
+    },
+    async initLikesForSongs() {
+      const { data: guestLikesData } = await axios.get(`/events/likes/${this.guestId}`);
+      const likesArray = guestLikesData.map((song) => song.songInEventId);
+      this.songsLikedByUser = new Set(likesArray);
+    },
+    isSongLikedByUser(id) {
+      return this.songsLikedByUser.has(id);
+    },
+    updateSongsLikes(action, songId) {
+      if (action === "addLike") {
+        this.songsLikedByUser.add(songId);
+      } else {
+        this.songsLikedByUser.remove(songId);
       }
     },
     async fetchSongData(youtubeId) {
@@ -196,15 +213,15 @@ export default {
     async changeLikesCounter(song) {
       // todo: rename
       const songId = song.id;
-      const action = song.isUserLiked === false ? "addLike" : "removeLike";
-      const response = await axios.post(`/events/${action}`, {
-        eventId: this.eventId,
+      const action = song.isUserLiked === false ? "addLike" : "removeLike"; // todo: create enum
+      const { data: updatedSong } = await axios.post(`/events/${action}`, {
         guestId: this.guestId,
         songId,
       });
 
-      song.likesCounter = response.data.likesCounter;
+      song.likesCounter = updatedSong.likesCounter;
       song.isUserLiked = !song.isUserLiked;
+      this.updateSongsLikes(action, song.id);
     },
   },
   computed: {
@@ -262,15 +279,15 @@ function youtubeParser(url) {
   }
 }
 
-.going {
+.green {
   background: hsl(120, 64%, 66%);
 }
 
-.notSure {
+.orange {
   background: hsla(39, 75%, 66%, 0.931);
 }
 
-.notGoing {
+.red {
   background: rgb(236, 129, 129);
 }
 
@@ -397,9 +414,6 @@ function youtubeParser(url) {
   max-height: 100%;
   box-sizing: border-box;
   height: inherit;
-  // @media only screen and (max-width: 700px) {
-  //   width: auto;
-  // }
 }
 
 .closed {

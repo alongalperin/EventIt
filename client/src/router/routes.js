@@ -22,6 +22,9 @@ const routes = [
     path: "/",
     name: "create",
     component: CreateEventComponent,
+    meta: {
+      title: "a",
+    },
   },
   {
     path: "/guest/:eventId/:guestId",
