@@ -27,6 +27,9 @@
               </button>
               likes: {{ song.likesCounter }}
             </div>
+            <div v-if="isEventOwner">
+              <button @click="deleteSong(song.id)" class="song-delete-button">Delete</button>
+            </div>
           </div>
         </li>
       </ul>
@@ -38,7 +41,7 @@ import axios from "@/axios";
 import LoaderComponent from "./UI/LoaderComponent";
 
 export default {
-  props: ["eventId", "guestId"],
+  props: ["eventId", "guestId", "isEventOwner"],
   components: {
     loaderComponent: LoaderComponent,
   },
@@ -155,6 +158,10 @@ export default {
         isUserLiked: false,
       };
     },
+    async deleteSong(songId) {
+      await axios.delete(`/events/song/${songId}`);
+      this.songs = this.songs.filter((song) => song.id !== songId);
+    },
   },
 };
 
@@ -207,8 +214,8 @@ function youtubeParser(url) {
     height: 8vh;
     display: grid;
     margin-top: 5px;
-    grid-template-columns: 26px 123px auto 60px;
-    grid-template-areas: "song-number thmbnail song-title song-like";
+    grid-template-columns: 26px 123px auto 60px 90px;
+    grid-template-areas: "song-number thmbnail song-title song-like song-delete-button";
     align-items: center;
 
     &:hover {
@@ -221,7 +228,7 @@ function youtubeParser(url) {
       grid-template-rows: auto;
       grid-template-areas:
         "song-title song-title song-title song-title song-title song-title song-title song-title song-title song-title"
-        "song-number . thmbnail thmbnail thmbnail . song-like song-like . .";
+        "song-number song-delete-button thmbnail thmbnail thmbnail . song-like song-like . .";
     }
 
     .num-song-grid-container {
@@ -259,13 +266,25 @@ function youtubeParser(url) {
       }
     }
   }
-}
 
-.song-thumbnail {
-  max-width: 100%;
-  max-height: 100%;
-  box-sizing: border-box;
-  height: inherit;
+  .song-delete-button {
+    grid-area: song-delete-button;
+    background: #dc3545;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 7px;
+    border-radius: 1px;
+    margin-right: 2px;
+    justify-self: right;
+  }
+
+  .song-thumbnail {
+    max-width: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+    height: inherit;
+  }
 }
 
 .closed {

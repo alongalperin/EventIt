@@ -46,6 +46,7 @@
       </template>
       <template v-slot:body>
         Click continue to reach event management panel
+        <h4>An Email with link to manage page was also sent to your email</h4>
       </template>
     </modalComponent>
   </div>
