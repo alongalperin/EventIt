@@ -83,7 +83,7 @@
                 likes: {{ song.likesCounter }}
               </div>
               <div>
-                <button class="song-delete-button">Delete</button>
+                <button @click="deleteSong(song.id)" class="song-delete-button">Delete</button>
               </div>
             </div>
           </li>
@@ -224,12 +224,16 @@ export default {
         youtubeId,
         title: youtubeDataResponse.snippet.title,
         thumbnails: youtubeDataResponse.snippet.thumbnails.high.url,
-        likecounter: 0,
+        likesCounter: 0,
         isUserLiked: false,
       });
 
       // reset input
       this.newSongURL = "";
+    },
+    async deleteSong(songId) {
+      await axios.delete(`/events/song/${songId}`);
+      this.songs = this.songs.filter((song) => song.id !== songId);
     },
   },
 };

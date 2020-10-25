@@ -34,7 +34,8 @@ let mailSenderService = function (to, eventId, guestId) {
       to: to,
       subject: "Your new event details",
       html: `<center>
-                <h2>Congratulations! You created an event</h2> <h3> here is a link for managing:</h3> 
+                <h2>Congratulations! You created an event</h2> <h3> here is a link for managing:</h3>
+                <h4>An Email with link to manage page was also sent to your email</h4>
                 <h3><a href="${url}manage/${eventId}">Manage Event</a></h3> <br/>
                 <img style="width: 30%; height: 40%" src="https://github.com/alongalperin/EventIt/blob/master/client/src/img/email_image.jpg?raw=true" />
               </center>`,

@@ -10,6 +10,7 @@ const getSongsOfEvent = router.get("/events/songs/:eventId", async function (req
     let songs = await SongsInEvents.findAll({
       where: { eventId: eventId },
       attributes: ["id", "youtubeId", "likesCounter"],
+      order: [["likesCounter", "DESC"]],
     });
     res.status(200).send(songs);
   } catch (e) {

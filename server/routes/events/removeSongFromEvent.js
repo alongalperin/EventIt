@@ -4,12 +4,11 @@ const { SongsInEvents } = require("../../db/Models/SongsInEvents");
 
 const router = express.Router();
 
-const removeSongFromEvent = router.delete("/event/song", async function (
-  req,
-  res
-) {
+const removeSongFromEvent = router.delete(`/events/song/:songId`, async function (req, res) {
+  console.log(req.params.songId);
+
   try {
-    let songInEventId = parseInt(req.body.songEventId, 10);
+    let songInEventId = parseInt(req.params.songId, 10);
     await SongsInEvents.destroy({
       where: {
         id: songInEventId,
@@ -18,6 +17,7 @@ const removeSongFromEvent = router.delete("/event/song", async function (
 
     res.status(200).send();
   } catch (e) {
+    console.log(e.message);
     res.status(500).send(e.message);
   }
 });
