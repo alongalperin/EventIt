@@ -2,11 +2,11 @@
 
 Self learning project.  
   
-Walk Through:  
-https://www.youtube.com/watch?v=DpAL7fcyedk  
-  
 Check it out:  
 https://eventit.herokuapp.com
+  
+Walk Through:  
+https://www.youtube.com/watch?v=DpAL7fcyedk  
 
 **Built With**  
 **Frontend:** VueJS  
